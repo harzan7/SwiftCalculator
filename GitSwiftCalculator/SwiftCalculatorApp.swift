@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct GitSwiftCalculatorApp: App {
+struct SwiftCalculatorApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
