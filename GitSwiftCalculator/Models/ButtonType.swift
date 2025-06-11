@@ -49,4 +49,13 @@ enum ButtonType: Hashable, CustomStringConvertible {
             return .secondary
         }
     }
+    
+    var foregroundColor: Color {
+        switch self {
+        case .allClear, .clear, .negative, .percent:
+            return .black
+        default:
+            return .white
+        }
+    }
 }
