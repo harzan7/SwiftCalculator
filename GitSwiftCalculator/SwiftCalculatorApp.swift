@@ -2,7 +2,7 @@
 //  GitSwiftCalculatorApp.swift
 //  GitSwiftCalculator
 //
-//  Created by Hojamil on 6/9/25.
+//  Created by Harza on 6/9/25.
 //
 
 import SwiftUI
