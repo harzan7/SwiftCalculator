@@ -22,23 +22,9 @@ struct CalculatorView: View {
     
     var body: some View {
         VStack {
-            // Spacer
             Spacer()
-            
             displayText
-            
-            // ButtonPad
-            VStack {
-                ForEach(buttonTypes, id: \.self) { row in
-                    HStack {
-                        ForEach(row, id: \.self) { buttonType in
-                            Button(buttonType.description) { }
-                        }
-                    }
-                }
-            }
-            
-            
+            buttonPad
         }
         .background(Color.black)
     }
@@ -61,5 +47,17 @@ extension CalculatorView {
             .font(.system(size: 88, weight: .light))
             .lineLimit(1)
             .minimumScaleFactor(0.2)
+    }
+    
+    private var buttonPad: some View {
+        VStack {
+            ForEach(buttonTypes, id: \.self) { row in
+                HStack {
+                    ForEach(row, id: \.self) { buttonType in
+                        Button(buttonType.description) { }
+                    }
+                }
+            }
+        }
     }
 }
