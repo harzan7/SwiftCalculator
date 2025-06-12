@@ -25,14 +25,7 @@ struct CalculatorView: View {
             // Spacer
             Spacer()
             
-            // DisplayText
-            Text("0")
-                .foregroundStyle(Color.white)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .font(.system(size: 88, weight: .light))
-                .lineLimit(1)
-                .minimumScaleFactor(0.2)
-                .padding()
+            displayText
             
             // ButtonPad
             VStack {
@@ -44,6 +37,8 @@ struct CalculatorView: View {
                     }
                 }
             }
+            
+            
         }
         .background(Color.black)
     }
@@ -57,3 +52,14 @@ struct CalculatorView: View {
 
 
 // MARK: - COMPONENTS
+extension CalculatorView {
+    private var displayText: some View {
+        Text("0")
+            .padding()
+            .foregroundStyle(Color.white)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .font(.system(size: 88, weight: .light))
+            .lineLimit(1)
+            .minimumScaleFactor(0.2)
+    }
+}
