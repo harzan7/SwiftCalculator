@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+// MARK: - BODY
 struct CalculatorView: View {
     var buttonTypes: [[ButtonType]] {
         [
@@ -47,6 +49,11 @@ struct CalculatorView: View {
     }
 }
 
+
+// MARK: - PREVIEWS
 #Preview {
     CalculatorView()
 }
+
+
+// MARK: - COMPONENTS
