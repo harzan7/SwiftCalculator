@@ -33,7 +33,15 @@ struct CalculatorView: View {
                 .padding()
             
             // ButtonPad
-            // TODO: ButtonPad
+            VStack {
+                ForEach(buttonTypes, id: \.self) { row in
+                    HStack {
+                        ForEach(row, id: \.self) { buttonType in
+                            Button(buttonType.description) { }
+                        }
+                    }
+                }
+            }
         }
         .background(Color.black)
     }
