@@ -11,6 +11,7 @@ struct CalculatorButtonStyle: ButtonStyle {
     var size: CGFloat
     var backgroundColor: Color
     var foregroundColor: Color
+    var isWide: Bool = false
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -21,6 +22,9 @@ struct CalculatorButtonStyle: ButtonStyle {
             .frame(
                 width: size,
                 height: size)
+            .frame(
+                maxWidth: isWide ? .infinity : size,
+                alignment: .leading)
             .background(backgroundColor)
             .foregroundStyle(foregroundColor)
             .overlay {

@@ -17,7 +17,8 @@ extension CalculatorView {
                     CalculatorButtonStyle(
                         size: getButtonSize(),
                         backgroundColor: buttonType.backgroundColor,
-                        foregroundColor: buttonType.foregroundColor))
+                        foregroundColor: buttonType.foregroundColor,
+                        isWide: buttonType == .digit(.zero)))
         }
         
         private func getButtonSize() -> CGFloat {
