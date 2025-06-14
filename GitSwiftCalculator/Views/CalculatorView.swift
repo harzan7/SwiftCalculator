@@ -10,6 +10,8 @@ import SwiftUI
 
 // MARK: - BODY
 struct CalculatorView: View {
+    @EnvironmentObject private var viewModel: ViewModel
+    
     var body: some View {
         VStack {
             Spacer()
@@ -31,7 +33,7 @@ struct CalculatorView: View {
 // MARK: - COMPONENTS
 extension CalculatorView {
     private var displayText: some View {
-        Text("0")
+        Text(viewModel.displayText)
             .padding()
             .foregroundStyle(Color.white)
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -42,7 +44,7 @@ extension CalculatorView {
     
     private var buttonPad: some View {
         VStack(spacing: Constants.padding) {
-            ForEach(buttonTypes, id: \.self) { row in
+            ForEach(viewModel.buttonTypes, id: \.self) { row in
                 HStack(spacing: Constants.padding) {
                     ForEach(row, id: \.self) { buttonType in
                         CalculatorButton(buttonType: buttonType)

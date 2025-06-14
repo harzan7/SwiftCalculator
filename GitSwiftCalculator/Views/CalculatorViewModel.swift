@@ -34,7 +34,7 @@ extension CalculatorView {
             case .digit(let digit):
                 calculator.setDigit(digit)
             case .operation(let operation):
-                calculator.setOperation(oepration)
+                calculator.setOperation(operation)
             case .negative:
                 calculator.toggleSign()
             case .percent:
