@@ -10,16 +10,6 @@ import SwiftUI
 
 // MARK: - BODY
 struct CalculatorView: View {
-    var buttonTypes: [[ButtonType]] {
-        [
-            [.allClear, .negative, .percent, .operation(.division)],
-            [.digit(.seven), .digit(.eight), .digit(.nine), .operation(.multiplication)],
-            [.digit(.four), .digit(.five), .digit(.six), .operation(.subtraction)],
-            [.digit(.one), .digit(.two), .digit(.three), .operation(.addition)],
-            [.digit(.zero), .decimal, .equals],
-        ]
-    }
-    
     var body: some View {
         VStack {
             Spacer()
