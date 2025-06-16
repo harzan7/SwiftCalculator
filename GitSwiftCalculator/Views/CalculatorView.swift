@@ -27,6 +27,7 @@ struct CalculatorView: View {
 // MARK: - PREVIEWS
 #Preview {
     CalculatorView()
+        .environmentObject(CalculatorView.ViewModel())
 }
 
 
