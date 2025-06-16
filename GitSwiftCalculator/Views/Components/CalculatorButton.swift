@@ -44,4 +44,5 @@ extension CalculatorView {
 #Preview {
     CalculatorView.CalculatorButton(
         buttonType: .digit(.five))
+    .environmentObject(CalculatorView.ViewModel())
 }
