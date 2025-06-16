@@ -104,6 +104,10 @@ struct Calculator {
     
     
     // MARK: - HELPERS
+    func operationIsHighlighted(_ operation: ArithmeticOperation) -> Bool {
+        return expression?.operation == operation && newNumber == nil
+    }
+    
     private func getNumberString(forNumber number: Decimal?, withCommas: Bool = false) -> String {
         return (withCommas ? number?.formatted(.number) : number.map(String.init)) ?? "0"
     }
