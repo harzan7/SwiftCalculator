@@ -9,8 +9,30 @@ import Foundation
 
 struct Calculator {
     
+    private struct ArithmeticExpression: Equatable {
+        var number: Decimal
+        var operation: ArithmeticOperation
+        
+        func evaluate(with secondNumber: Decimal) -> Decimal {
+            switch operation {
+            case .addition:
+                return number + secondNumber
+            case .subtraction:
+                return number - secondNumber
+            case .multiplication:
+                return number * secondNumber
+            case .division:
+                return number / secondNumber
+            }
+        }
+    }
+    
+    
     // MARK: - PROPERTIES
     private var newNumber: Decimal?
+    private var expression: ArithmeticExpression?
+    private var result: Decimal?
+    
     
     // MARK: - COMPUTED PROPERTIES
     var displayText: String {
@@ -19,8 +41,9 @@ struct Calculator {
     
     /// Current displaying number
     private var number: Decimal? {
-        newNumber
+        newNumber ?? expression?.number ?? result
     }
+    
     
     // MARK: - OPERATIONS
     mutating func setDigit(_ digit: Digit) {
@@ -38,7 +61,21 @@ struct Calculator {
     }
     
     mutating func setOperation(_ operation: ArithmeticOperation) {
+        // 1. Check if there is usable number (newNumber or previous result),
+        // and assign to new variable number
+        guard var number = newNumber ?? result else { return }
         
+        // 2. Check if there is already existingExpression.
+        // If there is, evaluate using number number and assign result to number
+        if let existingExpression = expression {
+            number = existingExpression.evaluate(with: number)
+        }
+        
+        // 3. Assign new ArithmeticExpression with number and operation to expression
+        expression = ArithmeticExpression(number: number, operation: operation)
+        
+        // 4. Reset newNumber
+        newNumber = nil
     }
     
     mutating func toggleSign() {
@@ -64,6 +101,7 @@ struct Calculator {
     mutating func clear() {
         
     }
+    
     
     // MARK: - HELPERS
     private func getNumberString(forNumber number: Decimal?, withCommas: Bool = false) -> String {

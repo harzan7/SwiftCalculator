@@ -11,6 +11,7 @@ import Combine
 extension CalculatorView {
     final class ViewModel: ObservableObject {
         
+        
         // MARK: - PROPERTIES
         @Published private var calculator = Calculator()
         
@@ -27,6 +28,7 @@ extension CalculatorView {
                 [.digit(.zero), .decimal, .equals],
             ]
         }
+        
         
         // MARK: - ACTIONS
         func performAction(for buttonType: ButtonType) {
