@@ -91,7 +91,15 @@ struct Calculator {
     }
     
     mutating func evaluate() {
+        // 1. unwrap newNumber and expression (contains the previous number and operation)
+        guard let number = newNumber, let expressionToEvaluate = expression else { return }
         
+        // 2. evaluate expression with newNumber and assign to result
+        result = expressionToEvaluate.evaluate(with: number)
+        
+        // 3. Reset expression and newNumber
+        expression = nil
+        newNumber = nil
     }
     
     mutating func allClear() {
