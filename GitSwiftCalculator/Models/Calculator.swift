@@ -83,7 +83,19 @@ struct Calculator {
     }
     
     mutating func setPercent() {
+        // 1. check if newNumber is currently used
+        if let number = newNumber {
+            // 2. divide by 100 and assign the new value
+            newNumber = number / 100
+            return
+        }
         
+        // 1. check if result is currently used
+        if let number = result {
+            // 2. divide by 100 and assign the new value
+            result = number / 100
+            return
+        }
     }
     
     mutating func setDecimal() {
