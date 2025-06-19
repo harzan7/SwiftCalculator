@@ -33,11 +33,14 @@ struct Calculator {
         didSet {
             guard newNumber != nil else { return }
             carryingNegative = false
+            carryingDecimal = false
         }
     }
     private var expression: ArithmeticExpression?
     private var result: Decimal?
     private var carryingNegative: Bool = false
+    private var carryingDecimal: Bool = false
+    private var carryingZeroCount: Int = 0
     
     
     // MARK: - COMPUTED PROPERTIES
@@ -50,20 +53,19 @@ struct Calculator {
         newNumber ?? expression?.number ?? result
     }
     
+    private var containsDecimal: Bool {
+        return getNumberString(forNumber: number).contains(".")
+    }
+    
     
     // MARK: - OPERATIONS
     mutating func setDigit(_ digit: Digit) {
-        // 1. Check if you can add digit (01 should not be possible)
-        guard canAddDigit(digit) else { return }
-        
-        // 2. Convert newNumber Decimal to a String
-        let numberString = getNumberString(forNumber: newNumber)
-        
-        // 3. Append digit to end of string,
-        //    convert string back to Decimal,
-        //    assign its new value to newNumber
-        newNumber = Decimal(string: numberString.appending("\(digit.rawValue)"))
-        
+        if containsDecimal && digit == .zero {
+            carryingZeroCount += 1
+        } else if canAddDigit(digit) {
+            let numberString = getNumberString(forNumber: newNumber)
+            newNumber = Decimal(string: numberString.appending("\(digit.rawValue)"))
+        }
     }
     
     mutating func setOperation(_ operation: ArithmeticOperation) {
@@ -115,7 +117,11 @@ struct Calculator {
     }
     
     mutating func setDecimal() {
+        // 1. Check if number already contains a decimal. If it does, return
+        if containsDecimal { return }
         
+        // 2. Make the carryingDecimal property true
+        carryingDecimal = true
     }
     
     mutating func evaluate() {
@@ -149,6 +155,14 @@ struct Calculator {
         
         if carryingNegative {
             numberString.insert("-", at: numberString.startIndex)
+        }
+        
+        if carryingDecimal {
+            numberString.insert(".", at: numberString.endIndex)
+        }
+        
+        if carryingZeroCount > 0 {
+            numberString.append(String(repeating: "0", count: carryingZeroCount))
         }
         
         return numberString
