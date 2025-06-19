@@ -63,6 +63,10 @@ struct Calculator {
         return getNumberString(forNumber: number).contains(".")
     }
     
+    var showAllClear: Bool {
+        newNumber == nil && expression == nil && result == nil || pressedClear
+    }
+    
     
     // MARK: - OPERATIONS
     mutating func setDigit(_ digit: Digit) {
